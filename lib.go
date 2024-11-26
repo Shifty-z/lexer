@@ -1,13 +1,14 @@
-package lex
+package lexer
 
 import (
 	"bufio"
 	"fmt"
+	"github.com/Shifty-z/lexer/lex"
 	"os"
 )
 
 // GetTokens - Given a file, lexically analyzes each `character` in the input and converts it to a single LexToken type.
-func GetTokens(file *os.File) [][]Token {
+func GetTokens(file *os.File) [][]lex.Token {
 	scanner := bufio.NewScanner(file)
 	lines := make([]string, 0)
 	for scanner.Scan() {
@@ -19,9 +20,9 @@ func GetTokens(file *os.File) [][]Token {
 		panic("Scanner encountered an error!")
 	}
 
-	lexedLines := make([][]Token, 0)
+	lexedLines := make([][]lex.Token, 0)
 	for _, line := range lines {
-		lexedLines = append(lexedLines, Lex(line))
+		lexedLines = append(lexedLines, lex.Lex(line))
 	}
 
 	return lexedLines
