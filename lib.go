@@ -26,3 +26,13 @@ func GetTokens(file *os.File) [][]Token {
 
 	return lexedLines
 }
+
+// GetTokensFrom - Given an input, analyzes each `character` in the input and converts it into a single LexToken type.
+func GetTokensFrom(lines []string) [][]Token {
+	lexedLines := make([][]Token, 0)
+	for _, line := range lines {
+		lexedLines = append(lexedLines, Lex(line))
+	}
+
+	return lexedLines
+}
