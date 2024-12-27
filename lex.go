@@ -20,6 +20,7 @@ const (
 	Unknown = iota
 	Whitespace
 	Number
+	NumberSign
 	ExclamationPoint
 	Ampersand
 	UnicodeLetter
@@ -52,6 +53,7 @@ var tokenTypeToName = map[int32]string{
 	Unknown:          "Unknown",
 	Whitespace:       "Whitespace",
 	Number:           "Number",
+	NumberSign:       "Number Sign",
 	ExclamationPoint: "Exclamation Point",
 	Ampersand:        "Ampersand",
 	UnicodeLetter:    "Letter",
@@ -90,6 +92,8 @@ func Lex(input string) []Token {
 			tokens = append(tokens, Token{ch, Whitespace})
 		case ch >= '0' && ch <= '9':
 			tokens = append(tokens, Token{ch, Number})
+		case ch == '#':
+			tokens = append(tokens, Token{ch, NumberSign})
 		case ch == '!':
 			tokens = append(tokens, Token{ch, ExclamationPoint})
 		case ch == '&':
